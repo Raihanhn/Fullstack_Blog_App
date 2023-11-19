@@ -1,6 +1,6 @@
 "use client";
 import { FormData } from "@/types/blog";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 
 const inputClass =
@@ -23,8 +23,13 @@ const FormNewPost = () => {
     });
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
-    <form className="max-w-md mx-auto p-4 ">
+    <form className="max-w-md mx-auto p-4 " onSubmit={handleSubmit}>
       <div className=" mb-4 ">
         <input
           type="text"
