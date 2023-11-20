@@ -1,4 +1,5 @@
 import Comments from "@/components/Comments";
+import FormComment from "@/components/FormComment";
 import React from "react";
 
 const BlogDetailPage = () => {
@@ -11,6 +12,7 @@ const BlogDetailPage = () => {
         voluptates odio sed, dicta magnam numquam iure reiciendis esse ipsam?
       </div>
       <Comments />
+      <FormComment />
     </div>
   );
 };
