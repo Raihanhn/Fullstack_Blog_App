@@ -1,4 +1,5 @@
 import FormNewPost from "@/components/FormNewPost";
+import { getCurrentUser } from "@/lib/session";
 
 export default function Home() {
   return (
