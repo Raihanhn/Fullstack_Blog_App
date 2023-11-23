@@ -13,7 +13,6 @@ const FormNewPost = () => {
     content: "",
   });
   const { data } = useSession();
-  console.log(data);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,7 +27,6 @@ const FormNewPost = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
   };
 
   return (
