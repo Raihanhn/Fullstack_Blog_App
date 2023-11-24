@@ -1,7 +1,11 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 
-const FormComment = () => {
+interface FormCommentProps {
+  postId: string;
+}
+
+const FormComment: FC<FormCommentProps> = ({ postId }) => {
   const [comment, setComment] = useState<string>("");
   const handleCommentChange = (e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
