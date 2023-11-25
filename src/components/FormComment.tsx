@@ -1,4 +1,7 @@
 "use client";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FC, useState } from "react";
 
 interface FormCommentProps {
@@ -7,12 +10,26 @@ interface FormCommentProps {
 
 const FormComment: FC<FormCommentProps> = ({ postId }) => {
   const [comment, setComment] = useState<string>("");
+  const router = useRouter();
   const handleCommentChange = (e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   };
+  const { data } = useSession();
 
-  const handleSubmitComment = () => {
-    console.log(comment);
+  const handleSubmitComment = async () => {
+    if (comment.trim() !== "") {
+      try {
+        const newComment = await axios.post("/api/comments", {
+          postId,
+          text: comment,
+        });
+        if (newComment.status === 200) {
+          router.refresh();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -28,6 +45,7 @@ const FormComment: FC<FormCommentProps> = ({ postId }) => {
         name="comment"
       />
       <button
+        disabled={!data?.user?.email}
         onClick={handleSubmitComment}
         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mt-2 disabled:bg-gray-400"
       >
